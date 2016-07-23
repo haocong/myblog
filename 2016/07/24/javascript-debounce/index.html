@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="coding,JavaScript," />
 
 
 
@@ -84,15 +84,16 @@
 
 
 
-<meta name="description" content="分享编程感悟与生活点滴">
-<meta property="og:type" content="website">
-<meta property="og:title" content="纯净的后花园">
-<meta property="og:url" content="https://haocong.me/index.html">
+<meta name="description" content="函数节流是什么　　在事件处理机制中可能会出现在极短的时间内多次执行事件处理函数，比如监听了键盘敲击事件，下面以一个具体需求来举例说明：当用户在文本框输入关键字时，自动查询匹配的关键字并将结果返回给用户。我们可以通过绑定文本框的键盘事件来监听输入框内容变化，一旦变化就向后台查询匹配关键字并返回以展示。假设我想查询“blackberry”，它包含10个字符，也许输入完成只花了1秒钟左右，那么在这1秒内">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript中函数节流的debounce模式">
+<meta property="og:url" content="https://haocong.me/2016/07/24/javascript-debounce/index.html">
 <meta property="og:site_name" content="纯净的后花园">
-<meta property="og:description" content="分享编程感悟与生活点滴">
+<meta property="og:description" content="函数节流是什么　　在事件处理机制中可能会出现在极短的时间内多次执行事件处理函数，比如监听了键盘敲击事件，下面以一个具体需求来举例说明：当用户在文本框输入关键字时，自动查询匹配的关键字并将结果返回给用户。我们可以通过绑定文本框的键盘事件来监听输入框内容变化，一旦变化就向后台查询匹配关键字并返回以展示。假设我想查询“blackberry”，它包含10个字符，也许输入完成只花了1秒钟左右，那么在这1秒内">
+<meta property="og:updated_time" content="2016-07-23T18:52:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="纯净的后花园">
-<meta name="twitter:description" content="分享编程感悟与生活点滴">
+<meta name="twitter:title" content="JavaScript中函数节流的debounce模式">
+<meta name="twitter:description" content="函数节流是什么　　在事件处理机制中可能会出现在极短的时间内多次执行事件处理函数，比如监听了键盘敲击事件，下面以一个具体需求来举例说明：当用户在文本框输入关键字时，自动查询匹配的关键字并将结果返回给用户。我们可以通过绑定文本框的键盘事件来监听输入框内容变化，一旦变化就向后台查询匹配关键字并返回以展示。假设我想查询“blackberry”，它包含10个字符，也许输入完成只花了1秒钟左右，那么在这1秒内">
 
 
 
@@ -113,9 +114,9 @@
 
 
 
-  <link rel="canonical" href="https://haocong.me/"/>
+  <link rel="canonical" href="https://haocong.me/2016/07/24/javascript-debounce/"/>
 
-  <title> 纯净的后花园 </title>
+  <title> JavaScript中函数节流的debounce模式 | 纯净的后花园 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -136,9 +137,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -255,9 +254,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -277,10 +276,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/07/24/javascript-debounce/" itemprop="url">
-                  JavaScript中函数节流的debounce模式
-                </a>
+                JavaScript中函数节流的debounce模式
               
             
           </h1>
@@ -346,162 +342,63 @@
       
 
       
-        
-          <h3 id="函数节流是什么"><a href="#函数节流是什么" class="headerlink" title="函数节流是什么"></a>函数节流是什么</h3><p>　　在事件处理机制中可能会出现在极短的时间内多次执行事件处理函数，比如监听了键盘敲击事件，下面以一个具体需求来举例说明：当用户在文本框输入关键字时，自动查询匹配的关键字并将结果返回给用户。我们可以通过绑定文本框的键盘事件来监听输入框内容变化，一旦变化就向后台查询匹配关键字并返回以展示。假设我想查询“blackberry”，它包含10个字符，也许输入完成只花了1秒钟左右，那么在这1秒内就会调用10次查询方法。这是一件非常恐怖的事情，如果淘宝的搜索框也这样实现，那就不禁让人担心它会不会在光棍节到来的几分钟之内就挂掉了（当然，它也许并没有这么脆弱，但这绝对不是最好的方案）
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/24/javascript-debounce/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
+        <h3 id="函数节流是什么"><a href="#函数节流是什么" class="headerlink" title="函数节流是什么"></a>函数节流是什么</h3><p>　　在事件处理机制中可能会出现在极短的时间内多次执行事件处理函数，比如监听了键盘敲击事件，下面以一个具体需求来举例说明：当用户在文本框输入关键字时，自动查询匹配的关键字并将结果返回给用户。我们可以通过绑定文本框的键盘事件来监听输入框内容变化，一旦变化就向后台查询匹配关键字并返回以展示。假设我想查询“blackberry”，它包含10个字符，也许输入完成只花了1秒钟左右，那么在这1秒内就会调用10次查询方法。这是一件非常恐怖的事情，如果淘宝的搜索框也这样实现，那就不禁让人担心它会不会在光棍节到来的几分钟之内就挂掉了（当然，它也许并没有这么脆弱，但这绝对不是最好的方案）<a id="more"></a><br>　　更好的方法是，我们希望用户已经输入完成，或者正在等待提示（也许他懒得再输入后面的内容）的时候，再查询匹配关键字。<br>　　最后我们发现，在我们期望的这两种情况下，用户会暂时停止输入，于是我们决定在用户暂停输入200毫秒后再进行查询（如果用户在不断地输入内容，那么我们认为他可能很明确自己想要的关键字，所以等一等再提示他）<br>　　这时，利用debounce函数，我们可以轻松实现这个需求。</p>
+<h3 id="函数截流示例"><a href="#函数截流示例" class="headerlink" title="函数截流示例"></a>函数截流示例</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Function</span>.prototype.debounce = <span class="function"><span class="keyword">function</span> (<span class="params">delay</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> timestamp, timeout, result, context, caller = <span class="keyword">this</span>, args</div><div class="line">  <span class="keyword">var</span> later = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> last = <span class="keyword">new</span> <span class="built_in">Date</span>() - timestamp</div><div class="line">    <span class="keyword">if</span> (last &lt; delay &amp;&amp; last &gt;= <span class="number">0</span>) &#123;</div><div class="line">      timeout = setTimeout(later, delay - last)</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      timeout = <span class="literal">null</span></div><div class="line">      result = caller.apply(context, args)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    args = <span class="built_in">arguments</span></div><div class="line">    context = <span class="keyword">this</span></div><div class="line">    timestamp = <span class="keyword">new</span> <span class="built_in">Date</span>()</div><div class="line">    <span class="keyword">if</span> (!timeout) timeout = setTimeout(later, delay)</div><div class="line">    <span class="keyword">return</span> result</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//用法</span></div><div class="line"><span class="keyword">var</span> print = <span class="function"><span class="keyword">function</span>(<span class="params">str</span>) </span>&#123; <span class="built_in">console</span>.log(str) &#125;.debounce(<span class="number">2000</span>)</div><div class="line"><span class="built_in">document</span>.body.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">  print(<span class="string">'clicked!'</span>) </div><div class="line">&#125;)</div></pre></td></tr></table></figure>
       
     </div>
 
     <div>
       
+        
+
+      
     </div>
 
     <div>
+      
+        
+
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/22/javascript-reference/" itemprop="url">
-                  JavaScript 引用类型的理解
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-22T15:30:34+08:00" content="2016-07-22">
-              2016-07-22
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/coding-life/" itemprop="url" rel="index">
-                    <span itemprop="name">coding life</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
+            <a href="/tags/coding/" rel="tag">#coding</a>
           
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/07/22/javascript-reference/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/22/javascript-reference/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = &#123;n: <span class="number">1</span>&#125;</div><div class="line"><span class="keyword">var</span> b = a;</div><div class="line">a.x = a = &#123;n: <span class="number">2</span>&#125;</div><div class="line"><span class="built_in">console</span>.log(a.x); <span class="comment">// undefined</span></div><div class="line"><span class="built_in">console</span>.log(b.x); <span class="comment">// Object &#123;n: 2&#125;</span></div></pre></td></tr></table></figure>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/22/javascript-reference/" rel="next" title="JavaScript 引用类型的理解">
+                <i class="fa fa-chevron-left"></i> JavaScript 引用类型的理解
+              </a>
+            
+          </div>
 
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -509,6 +406,17 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -528,8 +436,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -599,6 +516,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数节流是什么"><span class="nav-number">1.</span> <span class="nav-text">函数节流是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数截流示例"><span class="nav-number">2.</span> <span class="nav-text">函数截流示例</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -702,6 +630,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
@@ -718,9 +650,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'haocong';
-      var disqus_identifier = 'index.html';
-      var disqus_title = "";
-      var disqus_url = '';
+      var disqus_identifier = '2016/07/24/javascript-debounce/';
+      var disqus_title = "JavaScript中函数节流的debounce模式";
+      var disqus_url = 'https://haocong.me/2016/07/24/javascript-debounce/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
@@ -731,6 +663,8 @@
       }
 
       run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
       
     </script>
   
